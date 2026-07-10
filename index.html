@@ -1,92 +1,60 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bölgesel KGT</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; display: flex; height: 100vh; overflow: hidden; }
-        
-        /* Giriş Ekranı Üslubu */
-        #login-screen { width: 100%; height: 100vh; background-color: #333; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; position: absolute; z-index: 100; transition: opacity 0.5s ease; }
-        #login-screen input { padding: 10px; font-size: 16px; margin: 10px 0; border: none; border-radius: 5px; }
-        #login-screen button { padding: 10px 20px; font-size: 16px; background-color: #555; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        #login-screen button:hover { background-color: #777; }
-        
-        /* Əsas Panel Üslubu */
-        #dashboard { display: none; width: 100%; height: 100vh; display: flex; }
-        .sidebar { width: 250px; background-color: #333; color: #fff; height: 100vh; display: flex; flex-direction: column; }
-        .sidebar h2 { text-align: center; border-bottom: 1px solid #555; padding: 15px; margin: 0; }
-        .sidebar ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
-        .sidebar li { padding: 15px; border-bottom: 1px solid #444; cursor: pointer; }
-        .sidebar li:hover { background-color: #555; }
-        .main-content { flex-grow: 1; padding: 20px; overflow-y: auto; background-color: #f4f4f4; }
-        .card { background-color: #fff; padding: 15px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .status-offline { color: red; }
-        #map { height: 300px; background-color: #ddd; text-align: center; line-height: 300px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AZ KGT Portal</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial}
+#girisEkrani{width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%)}
+#girisQutu{background:white;padding:50px 40px;border-radius:20px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.3)}
+#girisQutu h2{margin-top:0;color:#333}#girisQutu input{padding:12px;width:280px;border:2px solid #ddd;border-radius:8px;font-size:16px}
+#girisQutu button{padding:12px 25px;margin-left:10px;border:none;background:#2a5298;color:white;border-radius:8px;cursor:pointer;font-size:16px}
+#girisQutu button:hover{background:#1e3c72}#xeta{color:red;margin-top:10px;min-height:20px;font-weight:bold}
+#xariteEkrani{display:none;padding:20px;background:#f5f5f5;min-height:100vh}
+#ustPanel{background:white;padding:15px;border-radius:10px;margin-bottom:15px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#map{height:75vh;width:100%;border-radius:10px;border:2px solid #ddd}
+.adminBtn{background:#e74c3c;color:white;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-weight:bold}
+.adminBtn:hover{background:#c0392b}.normalBtn{background:#3498db;color:white;border:none;padding:12px 20px;border-radius:8px;cursor:pointer}
+.normalBtn:hover{background:#2980b9}
+</style>
 </head>
 <body>
-
-    <!-- Giriş Sistemi -->
-    <div id="login-screen">
-        <h2>Giriş Kodu Daxil Edin</h2>
-        <input type="password" id="code-input" placeholder="Məsələn: polad">
-        <button onclick="checkCode()">Daxil ol</button>
-    </div>
-
-    <!-- Əsas Səhifə (Girişdən sonra görünəcək) -->
-    <div id="dashboard">
-        <div class="sidebar">
-            <h2>Bölgesel KGT</h2>
-            <ul>
-                <li>Ana Səhifə</li>
-                <li>Xəritə</li>
-                <li>Şəxsi Heyət</li>
-                <li>Sənədlər</li>
-                <li>Elanlar</li>
-                <li>Admin Paneli</li>
-            </ul>
-        </div>
-        <div class="main-content">
-            <div class="card">
-                <h3>Xəritə Bölməsi</h3>
-                <div id="map"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12486598.968146535!2d47.7546666!3d40.1759948!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307cd91aa21ddf%3A0xe6c9526b3e83cd08!2sAz%C9%99rbaycan!5e0!3m2!1saz!2saz!4v1783711440733!5m2!1saz!2saz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
-            </div>
-            <div class="card">
-                <h3>Şəxsi Heyət</h3>
-                <table>
-                    <tr>
-                        <td>Əhməd Vəliyev</td>
-                        <td>Leytenant</td>
-                        <td><span class="status-offline">oflayn</span></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="card">
-                <h3>Sənədlər</h3>
-                <p>Yüklənmiş sənədlərin siyahısı burada olacaq.</p>
-            </div>
-            <div class="card">
-                <h3>Elanlar</h3>
-                <p>Ümumi elanlar burada görünəcək.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function checkCode() {
-            var code = document.getElementById("code-input").value;
-            if (code.toLowerCase() === "polad") {
-                document.getElementById("login-screen").style.opacity = "0";
-                setTimeout(function() {
-                    document.getElementById("login-screen").style.display = "none";
-                    document.getElementById("dashboard").style.display = "flex";
-                }, 500);
-            } else {
-                alert("Kod səhvdir!");
-            }
-        }
-    </script>
+<div id="girisEkrani">
+<div id="girisQutu">
+<h2>🔒 AZ KGT Sistemi</h2>
+<p>Sistemə daxil olmaq üçün kod daxil edin</p>
+<div>
+<input type="password" id="kodInput" placeholder="İcazə kodunu yaz" onkeypress="if(event.key==='Enter') girisEt()">
+<button onclick="girisEt()">Daxil ol</button>
+</div>
+<p id="xeta"></p>
+</div>
+</div>
+<div id="xariteEkrani">
+<h1>🇦🇿 Azərbaycan KGT Portal</h1>
+<div id="ustPanel">
+<input type="text" id="axtarisInput" placeholder="Rayon, Kənd, Koordinat yaz" style="padding:10px;width:300px;border-radius:8px;border:1px solid #ccc">
+<button class="normalBtn" onclick="axtar()">🔍 Axtar</button>
+<input type="file" id="senedInput" style="display:none" onchange="senedYukle()">
+<button class="normalBtn" onclick="document.getElementById('senedInput').click()">📄 Sənəd Yüklə</button>
+<button id="bildirisBtn" class="adminBtn" onclick="bildirisGonder()" style="display:none">📢 Hamıya Bildiriş Göndər</button>
+<button class="normalBtn" onclick="cixisEt()">🚪 Çıxış</button>
+</div>
+<div id="map"></div>
+<p id="status" style="font-weight:bold;color:#2a5298"></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const ICAZE_KODLARI={"DAŞDƏMİR":"admin","SULEYMANÇAKIR":"admin","POLAT":"istifadeci","ABDULEY":"istifadeci","VİDİ":"istifadeci","MEMATİ":"istifadeci"};
+let rol="";let map;let marker;
+function girisEt(){const kod=document.getElementById('kodInput').value.trim().toUpperCase();const xeta=document.getElementById('xeta');if(ICAZE_KODLARI[kod]){rol=ICAZE_KODLARI[kod];document.getElementById('girisEkrani').style.display="none";document.getElementById('xariteEkrani').style.display="block";xeta.innerText="";xariteniBaslat();if(rol==="admin"){document.getElementById('bildirisBtn').style.display="inline-block";}}else{xeta.innerText="❌ Kod səhvdir! Yenidən yoxlayın.";}}
+function cixisEt(){document.getElementById('xariteEkrani').style.display="none";document.getElementById('girisEkrani').style.display="flex";document.getElementById('kodInput').value="";rol="";}
+function xariteniBaslat(){if(map)return;map=L.map('map').setView([40.4093,49.8671],7);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);marker=L.marker([40.4093,49.8671]).addTo(map).bindPopup("Bakı şəhəri");}
+function axtar(){const q=document.getElementById('axtarisInput').value.toLowerCase().trim();document.getElementById('status').innerText=q+" axtarılır...";const yerler={"baki":[40.4093,49.8671,"Bakı şəhəri"],"sumqayit":[40.5855,49.6316,"Sumqayıt"],"gence":[40.6828,46.3606,"Gəncə"],"seki":[41.1917,47.1694,"Şəki"],"quba":[41.3593,48.5152,"Quba"],"lenkeran":[38.7556,48.8511,"Lənkəran"],"serur":[39.7636,44.9714,"Şərur"],"naxcivan":[39.2089,45.4122,"Naxçıvan"]};for(let yer in yerler){if(q.includes(yer)){map.setView([yerler[yer][0],yerler[yer][1]],10);marker.setLatLng([yerler[yer][0],yerler[yer][1]]).setPopupContent(yerler[yer][2]).openPopup();document.getElementById('status').innerText="✅ "+yerler[yer][2]+" tapıldı";return;}}document.getElementById('status').innerText="❌ Yer tapılmadı. Demo: Bakı, Gəncə, Şəki, Quba və s.";}
+function bildirisGonder(){const mesaj="Polat bəy sizi ofisə çağır";alert("📢 BİLDİRİŞ GÖNDƏRİLDİ: "+mesaj);document.getElementById('status').innerText="📢 Bildiriş bütün istifadəçilərə göndərildi";}
+function senedYukle(){const file=document.getElementById('senedInput').files[0];if(file){document.getElementById('status').innerText="✅ "+file.name+" seçildi";alert(file.name+" faylı seçildi. Sonra bunu serverə yükləyəcəyik");}}
+</script>
 </body>
 </html>
