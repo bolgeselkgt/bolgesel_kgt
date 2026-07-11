@@ -512,7 +512,218 @@ alert("Admin panelinə giriş icazəniz yoxdur.");
 }
 
 }
+<!-- ========================= -->
+<!-- 2A HİSSƏ - ADMIN PANEL -->
+<!-- Bunu <div id="main"> daxilində -->
+<!-- xəritədən sonra yerləşdir -->
+<!-- ========================= -->
 
+<section id="dashboard">
+
+<div class="panel">
+
+<h2>REGIONAL KGT İDARƏETMƏ PANELİ</h2>
+
+<div class="cards">
+
+<div class="box" onclick="openAdmin()">
+🛡
+<h3>ADMIN PANELİ</h3>
+<p>Yalnız admin üçün</p>
+</div>
+
+<div class="box">
+👤
+<h3>İSTİFADƏÇİLƏR</h3>
+<p>Aktiv istifadəçilər</p>
+</div>
+
+<div class="box">
+📁
+<h3>SƏNƏDLƏR</h3>
+<p>Bütün sənədlər</p>
+</div>
+
+<div class="box">
+📢
+<h3>ELANLAR</h3>
+<p>Yeni elanlar</p>
+</div>
+
+<div class="box">
+📨
+<h3>MESAJLAR</h3>
+<p>Bildiriş sistemi</p>
+</div>
+
+<div class="box">
+⚙
+<h3>PARAMETRLƏR</h3>
+<p>Sistem ayarları</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="adminScreen" style="display:none;">
+
+<h2>ADMIN PANELİ</h2>
+
+<div class="adminBox">
+
+<button>➕ Yeni istifadəçi yarat</button>
+
+<button>📢 Elan paylaş</button>
+
+<button>📄 Sənəd əlavə et</button>
+
+<button>✉ İstifadəçiyə mesaj göndər</button>
+
+<button>🟢 Onlayn istifadəçilər</button>
+
+<button>🔴 Oflayn istifadəçilər</button>
+
+<button>⚙ Sistem parametrləri</button>
+
+</div>
+
+</section>
+
+<style>
+
+.panel{
+
+width:95%;
+margin:40px auto;
+
+}
+
+.panel h2{
+
+text-align:center;
+margin-bottom:30px;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.box{
+
+background:#111;
+
+padding:25px;
+
+border-radius:15px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.3s;
+
+border:1px solid #222;
+
+}
+
+.box:hover{
+
+transform:scale(1.04);
+
+background:#0094ff;
+
+}
+
+.box h3{
+
+margin-top:10px;
+
+margin-bottom:10px;
+
+}
+
+.adminBox{
+
+display:grid;
+
+gap:15px;
+
+margin-top:30px;
+
+}
+
+.adminBox button{
+
+padding:16px;
+
+font-size:17px;
+
+border:none;
+
+border-radius:10px;
+
+background:#007cff;
+
+color:white;
+
+cursor:pointer;
+
+}
+/* ===========================
+   2B HİSSƏ - JavaScript
+   </script> bağlanmazdan əvvəl əlavə et
+=========================== */
+
+function openAdmin() {
+
+    if (window.user !== "POLAT") {
+        alert("Bu bölmə yalnız admin üçündür.");
+        return;
+    }
+
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("adminScreen").style.display = "block";
+
+}
+
+function closeAdmin() {
+
+    document.getElementById("dashboard").style.display = "block";
+    document.getElementById("adminScreen").style.display = "none";
+
+}
+
+/* Gələcəkdə istifadə olunacaq funksiyalar */
+
+function addUser() {
+    alert("Yeni istifadəçi əlavə etmə sistemi hazırlanacaq.");
+}
+
+function sendAnnouncement() {
+    alert("Elan paylaşma sistemi hazırlanacaq.");
+}
+
+function addDocument() {
+    alert("Sənəd əlavə etmə sistemi hazırlanacaq.");
+}
+
+function sendMessage() {
+    alert("Mesaj göndərmə sistemi hazırlanacaq.");
+}
+
+function systemSettings() {
+    alert("Parametrlər bölməsi hazırlanacaq.");
+  }
+</style>
 </script>
 
 </body>
