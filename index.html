@@ -3,58 +3,517 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AZ KGT Portal</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<title>REGIONAL KGT</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial}
-#girisEkrani{width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#1e3c72 0%,#2a5298 100%)}
-#girisQutu{background:white;padding:50px 40px;border-radius:20px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.3)}
-#girisQutu h2{margin-top:0;color:#333}#girisQutu input{padding:12px;width:280px;border:2px solid #ddd;border-radius:8px;font-size:16px}
-#girisQutu button{padding:12px 25px;margin-left:10px;border:none;background:#2a5298;color:white;border-radius:8px;cursor:pointer;font-size:16px}
-#girisQutu button:hover{background:#1e3c72}#xeta{color:red;margin-top:10px;min-height:20px;font-weight:bold}
-#xariteEkrani{display:none;padding:20px;background:#f5f5f5;min-height:100vh}
-#ustPanel{background:white;padding:15px;border-radius:10px;margin-bottom:15px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-#map{height:75vh;width:100%;border-radius:10px;border:2px solid #ddd}
-.adminBtn{background:#e74c3c;color:white;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-weight:bold}
-.adminBtn:hover{background:#c0392b}.normalBtn{background:#3498db;color:white;border:none;padding:12px 20px;border-radius:8px;cursor:pointer}
-.normalBtn:hover{background:#2980b9}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Poppins,sans-serif;
+background:#070707;
+color:white;
+overflow-x:hidden;
+}
+
+/* LOGIN */
+
+#loginPage{
+
+width:100%;
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)),
+url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80");
+
+background-size:cover;
+background-position:center;
+
+}
+
+.logo{
+
+font-family:Orbitron;
+font-size:55px;
+font-weight:800;
+letter-spacing:8px;
+
+margin-bottom:60px;
+
+text-shadow:
+0 0 20px #00bfff,
+0 0 50px #009dff;
+
+}
+
+.login{
+
+width:350px;
+max-width:90%;
+
+}
+
+.login input{
+
+width:100%;
+padding:16px;
+
+background:#101010;
+
+border:1px solid #555;
+
+border-radius:10px;
+
+color:white;
+
+font-size:18px;
+
+outline:none;
+
+}
+
+.login button{
+
+margin-top:20px;
+
+width:100%;
+padding:16px;
+
+border:none;
+
+border-radius:10px;
+
+font-size:18px;
+
+font-weight:bold;
+
+background:#0094ff;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login button:hover{
+
+background:#006fd1;
+
+}
+
+.error{
+
+margin-top:15px;
+
+text-align:center;
+
+color:red;
+
+}
+
+/* MAIN */
+
+#main{
+
+display:none;
+
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+position:fixed;
+
+top:0;
+
+left:-280px;
+
+width:280px;
+
+height:100%;
+
+background:#111;
+
+transition:.35s;
+
+padding-top:70px;
+
+z-index:9999;
+
+}
+
+.sidebar a{
+
+display:block;
+
+padding:17px;
+
+text-decoration:none;
+
+color:white;
+
+font-size:17px;
+
+border-bottom:1px solid #222;
+
+}
+
+.sidebar a:hover{
+
+background:#0094ff;
+
+}
+
+.sidebar.active{
+
+left:0;
+
+}
+
+.menu{
+
+position:fixed;
+
+top:15px;
+
+left:15px;
+
+font-size:30px;
+
+cursor:pointer;
+
+z-index:10000;
+
+}
+
+/* HEADER */
+
+header{
+
+text-align:center;
+
+padding:30px;
+
+font-size:30px;
+
+font-family:Orbitron;
+
+}
+
+/* MAP */
+
+.map{
+
+width:95%;
+
+height:450px;
+
+margin:auto;
+
+border-radius:15px;
+
+overflow:hidden;
+
+border:2px solid #444;
+
+}
+
+.map iframe{
+
+width:100%;
+
+height:100%;
+
+border:0;
+
+}
+
+/* USERS */
+
+.users{
+
+width:95%;
+
+margin:30px auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:15px;
+
+}
+
+.card{
+
+background:#111;
+
+padding:20px;
+
+border-radius:12px;
+
+border:1px solid #222;
+
+}
+
+.online{
+
+color:#00ff5e;
+
+font-weight:bold;
+
+}
+
+.offline{
+
+color:red;
+
+font-weight:bold;
+
+}
+
+/* ADMIN */
+
+#adminPanel{
+
+display:none;
+
+padding:30px;
+
+}
+
+.adminBox{
+
+background:#111;
+
+padding:20px;
+
+margin-bottom:20px;
+
+border-radius:12px;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.logo{
+
+font-size:35px;
+
+letter-spacing:4px;
+
+}
+
+header{
+
+font-size:22px;
+
+}
+
+.map{
+
+height:300px;
+
+}
+
+}
+
 </style>
+
 </head>
+
 <body>
-<div id="girisEkrani">
-<div id="girisQutu">
-<h2>🔒 AZ KGT Sistemi</h2>
-<p>Sistemə daxil olmaq üçün kod daxil edin</p>
-<div>
-<input type="password" id="kodInput" placeholder="İcazə kodunu yaz" onkeypress="if(event.key==='Enter') girisEt()">
-<button onclick="girisEt()">Daxil ol</button>
+
+<!-- LOGIN -->
+
+<div id="loginPage">
+
+<div class="logo">
+REGIONAL KGT
 </div>
-<p id="xeta"></p>
+
+<div class="login">
+
+<input
+type="password"
+id="password"
+placeholder="Giriş Parolu">
+
+<button onclick="login()">
+GİRİŞ
+</button>
+
+<div class="error" id="error"></div>
+
 </div>
+
 </div>
-<div id="xariteEkrani">
-<h1>🇦🇿 Azərbaycan KGT Portal</h1>
-<div id="ustPanel">
-<input type="text" id="axtarisInput" placeholder="Rayon, Kənd, Koordinat yaz" style="padding:10px;width:300px;border-radius:8px;border:1px solid #ccc">
-<button class="normalBtn" onclick="axtar()">🔍 Axtar</button>
-<input type="file" id="senedInput" style="display:none" onchange="senedYukle()">
-<button class="normalBtn" onclick="document.getElementById('senedInput').click()">📄 Sənəd Yüklə</button>
-<button id="bildirisBtn" class="adminBtn" onclick="bildirisGonder()" style="display:none">📢 Hamıya Bildiriş Göndər</button>
-<button class="normalBtn" onclick="cixisEt()">🚪 Çıxış</button>
+
+<!-- MAIN -->
+
+<div id="main">
+
+<div class="menu" onclick="menuOpen()">
+☰
 </div>
-<div id="map"></div>
-<p id="status" style="font-weight:bold;color:#2a5298"></p>
+
+<div class="sidebar" id="sidebar">
+
+<a href="#">Ana Səhifə</a>
+
+<a href="#" onclick="admin()">Admin Paneli</a>
+
+<a href="#">İstifadəçilər</a>
+
+<a href="#">Sənədlər</a>
+
+<a href="#">Elanlar</a>
+
+<a href="#">Parametrlər</a>
+
 </div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<header>
+
+REGIONAL KGT
+
+</header>
+
+<div class="map">
+
+<iframe
+src="https://www.openstreetmap.org/export/embed.html?bbox=44.7%2C38.2%2C50.4%2C41.9&layer=mapnik">
+</iframe>
+
+</div>
+
+<div class="users">
+
+<div class="card">
+ÇAKIR
+<br><br>
+<span class="online">
+🟢 ONLAYN
+</span>
+</div>
+
+<div class="card">
+POLAT
+<br><br>
+<span class="online">
+🟢 ONLAYN
+</span>
+</div>
+
+<div class="card">
+ABDÜLEY
+<br><br>
+<span class="offline">
+🔴 OFLAYN
+</span>
+</div>
+
+</div>
+
+<div id="adminPanel">
+
+<div class="adminBox">
+
+<h2>Admin Paneli</h2>
+
+<br>
+
+<button>İstifadəçi əlavə et</button>
+
+<br><br>
+
+<button>Elan paylaş</button>
+
+<br><br>
+
+<button>Sənəd əlavə et</button>
+
+<br><br>
+
+<button>Mesaj göndər</button>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-const ICAZE_KODLARI={"DAŞDƏMİR":"admin","SULEYMANÇAKIR":"admin","POLAT":"istifadeci","ABDULEY":"istifadeci","VİDİ":"istifadeci","MEMATİ":"istifadeci"};
-let rol="";let map;let marker;
-function girisEt(){const kod=document.getElementById('kodInput').value.trim().toUpperCase();const xeta=document.getElementById('xeta');if(ICAZE_KODLARI[kod]){rol=ICAZE_KODLARI[kod];document.getElementById('girisEkrani').style.display="none";document.getElementById('xariteEkrani').style.display="block";xeta.innerText="";xariteniBaslat();if(rol==="admin"){document.getElementById('bildirisBtn').style.display="inline-block";}}else{xeta.innerText="❌ Kod səhvdir! Yenidən yoxlayın.";}}
-function cixisEt(){document.getElementById('xariteEkrani').style.display="none";document.getElementById('girisEkrani').style.display="flex";document.getElementById('kodInput').value="";rol="";}
-function xariteniBaslat(){if(map)return;map=L.map('map').setView([40.4093,49.8671],7);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);marker=L.marker([40.4093,49.8671]).addTo(map).bindPopup("Bakı şəhəri");}
-function axtar(){const q=document.getElementById('axtarisInput').value.toLowerCase().trim();document.getElementById('status').innerText=q+" axtarılır...";const yerler={"baki":[40.4093,49.8671,"Bakı şəhəri"],"sumqayit":[40.5855,49.6316,"Sumqayıt"],"gence":[40.6828,46.3606,"Gəncə"],"seki":[41.1917,47.1694,"Şəki"],"quba":[41.3593,48.5152,"Quba"],"lenkeran":[38.7556,48.8511,"Lənkəran"],"serur":[39.7636,44.9714,"Şərur"],"naxcivan":[39.2089,45.4122,"Naxçıvan"]};for(let yer in yerler){if(q.includes(yer)){map.setView([yerler[yer][0],yerler[yer][1]],10);marker.setLatLng([yerler[yer][0],yerler[yer][1]]).setPopupContent(yerler[yer][2]).openPopup();document.getElementById('status').innerText="✅ "+yerler[yer][2]+" tapıldı";return;}}document.getElementById('status').innerText="❌ Yer tapılmadı. Demo: Bakı, Gəncə, Şəki, Quba və s.";}
-function bildirisGonder(){const mesaj="Polat bəy sizi ofisə çağır";alert("📢 BİLDİRİŞ GÖNDƏRİLDİ: "+mesaj);document.getElementById('status').innerText="📢 Bildiriş bütün istifadəçilərə göndərildi";}
-function senedYukle(){const file=document.getElementById('senedInput').files[0];if(file){document.getElementById('status').innerText="✅ "+file.name+" seçildi";alert(file.name+" faylı seçildi. Sonra bunu serverə yükləyəcəyik");}}
+
+let adminPassword="POLAT";
+
+function login(){
+
+let pass=document.getElementById("password").value.toUpperCase();
+
+if(
+
+pass=="ÇAKIR"||
+
+pass=="POLAT"||
+
+pass=="ABDÜLEY"
+
+){
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("main").style.display="block";
+
+window.user=pass;
+
+}else{
+
+document.getElementById("error").innerHTML="Parol yanlışdır";
+
+}
+
+}
+
+function menuOpen(){
+
+document.getElementById("sidebar").classList.toggle("active");
+
+}
+
+function admin(){
+
+if(window.user==adminPassword){
+
+document.getElementById("adminPanel").style.display="block";
+
+}else{
+
+alert("Admin panelinə giriş icazəniz yoxdur.");
+
+}
+
+}
+
 </script>
+
 </body>
 </html>
