@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -9,759 +10,422 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-font-family:Poppins,sans-serif;
-background:#070707;
-color:white;
-overflow-x:hidden;
+    font-family:Poppins,sans-serif;
+    background:#070707;
+    color:white;
+    overflow-x:hidden;
 }
 
 /* LOGIN */
-
 #loginPage{
-
-width:100%;
-height:100vh;
-
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-
-background:
-linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)),
-url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80");
-
-background-size:cover;
-background-position:center;
-
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background: linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)), url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
 }
 
 .logo{
-
-font-family:Orbitron;
-font-size:55px;
-font-weight:800;
-letter-spacing:8px;
-
-margin-bottom:60px;
-
-text-shadow:
-0 0 20px #00bfff,
-0 0 50px #009dff;
-
+    font-family:Orbitron;
+    font-size:55px;
+    font-weight:800;
+    letter-spacing:8px;
+    margin-bottom:60px;
+    text-shadow: 0 0 20px #00bfff, 0 0 50px #009dff;
 }
 
 .login{
-
-width:350px;
-max-width:90%;
-
+    width:350px;
+    max-width:90%;
 }
 
 .login input{
-
-width:100%;
-padding:16px;
-
-background:#101010;
-
-border:1px solid #555;
-
-border-radius:10px;
-
-color:white;
-
-font-size:18px;
-
-outline:none;
-
+    width:100%;
+    padding:16px;
+    background:#101010;
+    border:1px solid #555;
+    border-radius:10px;
+    color:white;
+    font-size:18px;
+    outline:none;
 }
 
 .login button{
-
-margin-top:20px;
-
-width:100%;
-padding:16px;
-
-border:none;
-
-border-radius:10px;
-
-font-size:18px;
-
-font-weight:bold;
-
-background:#0094ff;
-
-color:white;
-
-cursor:pointer;
-
-transition:.3s;
-
+    margin-top:20px;
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    background:#0094ff;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
 }
 
 .login button:hover{
-
-background:#006fd1;
-
+    background:#006fd1;
 }
 
 .error{
-
-margin-top:15px;
-
-text-align:center;
-
-color:red;
-
+    margin-top:15px;
+    text-align:center;
+    color:red;
 }
 
 /* MAIN */
-
 #main{
-
-display:none;
-
+    display:none;
 }
 
 /* SIDEBAR */
-
 .sidebar{
-
-position:fixed;
-
-top:0;
-
-left:-280px;
-
-width:280px;
-
-height:100%;
-
-background:#111;
-
-transition:.35s;
-
-padding-top:70px;
-
-z-index:9999;
-
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:280px;
+    height:100%;
+    background:#111;
+    transition:.35s;
+    padding-top:70px;
+    z-index:9999;
 }
 
 .sidebar a{
-
-display:block;
-
-padding:17px;
-
-text-decoration:none;
-
-color:white;
-
-font-size:17px;
-
-border-bottom:1px solid #222;
-
+    display:block;
+    padding:17px;
+    text-decoration:none;
+    color:white;
+    font-size:17px;
+    border-bottom:1px solid #222;
 }
 
 .sidebar a:hover{
-
-background:#0094ff;
-
+    background:#0094ff;
 }
 
 .sidebar.active{
-
-left:0;
-
+    left:0;
 }
 
 .menu{
-
-position:fixed;
-
-top:15px;
-
-left:15px;
-
-font-size:30px;
-
-cursor:pointer;
-
-z-index:10000;
-
+    position:fixed;
+    top:15px;
+    left:15px;
+    font-size:30px;
+    cursor:pointer;
+    z-index:10000;
 }
 
 /* HEADER */
-
 header{
-
-text-align:center;
-
-padding:30px;
-
-font-size:30px;
-
-font-family:Orbitron;
-
+    text-align:center;
+    padding:30px;
+    font-size:30px;
+    font-family:Orbitron;
 }
 
 /* MAP */
-
 .map{
-
-width:95%;
-
-height:450px;
-
-margin:auto;
-
-border-radius:15px;
-
-overflow:hidden;
-
-border:2px solid #444;
-
+    width:95%;
+    height:450px;
+    margin:auto;
+    border-radius:15px;
+    overflow:hidden;
+    border:2px solid #444;
 }
 
 .map iframe{
-
-width:100%;
-
-height:100%;
-
-border:0;
-
+    width:100%;
+    height:100%;
+    border:0;
 }
 
-/* USERS */
-
-.users{
-
-width:95%;
-
-margin:30px auto;
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-gap:15px;
-
-}
-
-.card{
-
-background:#111;
-
-padding:20px;
-
-border-radius:12px;
-
-border:1px solid #222;
-
-}
-
-.online{
-
-color:#00ff5e;
-
-font-weight:bold;
-
-}
-
-.offline{
-
-color:red;
-
-font-weight:bold;
-
-}
-
-/* ADMIN */
-
-#adminPanel{
-
-display:none;
-
-padding:30px;
-
-}
-
-.adminBox{
-
-background:#111;
-
-padding:20px;
-
-margin-bottom:20px;
-
-border-radius:12px;
-
-}
-
-/* RESPONSIVE */
-
-@media(max-width:768px){
-
-.logo{
-
-font-size:35px;
-
-letter-spacing:4px;
-
-}
-
-header{
-
-font-size:22px;
-
-}
-
-.map{
-
-height:300px;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<!-- LOGIN -->
-
-<div id="loginPage">
-
-<div class="logo">
-REGIONAL KGT
-</div>
-
-<div class="login">
-
-<input
-type="password"
-id="password"
-placeholder="Giriş Parolu">
-
-<button onclick="login()">
-GİRİŞ
-</button>
-
-<div class="error" id="error"></div>
-
-</div>
-
-</div>
-
-<!-- MAIN -->
-
-<div id="main">
-
-<div class="menu" onclick="menuOpen()">
-☰
-</div>
-
-<div class="sidebar" id="sidebar">
-
-<a href="#">Ana Səhifə</a>
-
-<a href="#" onclick="admin()">Admin Paneli</a>
-
-<a href="#">İstifadəçilər</a>
-
-<a href="#">Sənədlər</a>
-
-<a href="#">Elanlar</a>
-
-<a href="#">Parametrlər</a>
-
-</div>
-
-<header>
-
-REGIONAL KGT
-
-</header>
-
-<div class="map">
-
-<iframe
-src="https://www.openstreetmap.org/export/embed.html?bbox=44.7%2C38.2%2C50.4%2C41.9&layer=mapnik">
-</iframe>
-
-</div>
-
-<div class="users">
-
-<div class="card">
-ÇAKIR
-<br><br>
-<span class="online">
-🟢 ONLAYN
-</span>
-</div>
-
-<div class="card">
-POLAT
-<br><br>
-<span class="online">
-🟢 ONLAYN
-</span>
-</div>
-
-<div class="card">
-ABDÜLEY
-<br><br>
-<span class="offline">
-🔴 OFLAYN
-</span>
-</div>
-
-</div>
-
-<div id="adminPanel">
-
-<div class="adminBox">
-
-<h2>Admin Paneli</h2>
-
-<br>
-
-<button>İstifadəçi əlavə et</button>
-
-<br><br>
-
-<button>Elan paylaş</button>
-
-<br><br>
-
-<button>Sənəd əlavə et</button>
-
-<br><br>
-
-<button>Mesaj göndər</button>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-let adminPassword="POLAT";
-
-function login(){
-
-let pass=document.getElementById("password").value.toUpperCase();
-
-if(
-
-pass=="ÇAKIR"||
-
-pass=="POLAT"||
-
-pass=="ABDÜLEY"
-
-){
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("main").style.display="block";
-
-window.user=pass;
-
-}else{
-
-document.getElementById("error").innerHTML="Parol yanlışdır";
-
-}
-
-}
-
-function menuOpen(){
-
-document.getElementById("sidebar").classList.toggle("active");
-
-}
-
-function admin(){
-
-if(window.user==adminPassword){
-
-document.getElementById("adminPanel").style.display="block";
-
-}else{
-
-alert("Admin panelinə giriş icazəniz yoxdur.");
-
-}
-
-}
-<!-- ========================= -->
-<!-- 2A HİSSƏ - ADMIN PANEL -->
-<!-- Bunu <div id="main"> daxilində -->
-<!-- xəritədən sonra yerləşdir -->
-<!-- ========================= -->
-
-<section id="dashboard">
-
-<div class="panel">
-
-<h2>REGIONAL KGT İDARƏETMƏ PANELİ</h2>
-
-<div class="cards">
-
-<div class="box" onclick="openAdmin()">
-🛡
-<h3>ADMIN PANELİ</h3>
-<p>Yalnız admin üçün</p>
-</div>
-
-<div class="box">
-👤
-<h3>İSTİFADƏÇİLƏR</h3>
-<p>Aktiv istifadəçilər</p>
-</div>
-
-<div class="box">
-📁
-<h3>SƏNƏDLƏR</h3>
-<p>Bütün sənədlər</p>
-</div>
-
-<div class="box">
-📢
-<h3>ELANLAR</h3>
-<p>Yeni elanlar</p>
-</div>
-
-<div class="box">
-📨
-<h3>MESAJLAR</h3>
-<p>Bildiriş sistemi</p>
-</div>
-
-<div class="box">
-⚙
-<h3>PARAMETRLƏR</h3>
-<p>Sistem ayarları</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="adminScreen" style="display:none;">
-
-<h2>ADMIN PANELİ</h2>
-
-<div class="adminBox">
-
-<button>➕ Yeni istifadəçi yarat</button>
-
-<button>📢 Elan paylaş</button>
-
-<button>📄 Sənəd əlavə et</button>
-
-<button>✉ İstifadəçiyə mesaj göndər</button>
-
-<button>🟢 Onlayn istifadəçilər</button>
-
-<button>🔴 Oflayn istifadəçilər</button>
-
-<button>⚙ Sistem parametrləri</button>
-
-</div>
-
-</section>
-
-<style>
-
+/* USERS & PANEL */
 .panel{
-
-width:95%;
-margin:40px auto;
-
+    width:95%;
+    margin:40px auto;
 }
 
 .panel h2{
-
-text-align:center;
-margin-bottom:30px;
-
+    text-align:center;
+    margin-bottom:30px;
 }
 
 .cards{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-
-gap:20px;
-
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 
 .box{
-
-background:#111;
-
-padding:25px;
-
-border-radius:15px;
-
-text-align:center;
-
-cursor:pointer;
-
-transition:.3s;
-
-border:1px solid #222;
-
+    background:#111;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+    border:1px solid #222;
 }
 
 .box:hover{
-
-transform:scale(1.04);
-
-background:#0094ff;
-
+    transform:scale(1.04);
+    background:#0094ff;
 }
 
 .box h3{
+    margin-top:10px;
+    margin-bottom:10px;
+}
 
-margin-top:10px;
-
-margin-bottom:10px;
-
+/* ADMIN SCREENS */
+#adminPanel, #adminScreen{
+    display:none;
+    width:95%;
+    margin:30px auto;
+    padding:30px;
+    background:#111;
+    border-radius:12px;
+    border:1px solid #222;
 }
 
 .adminBox{
-
-display:grid;
-
-gap:15px;
-
-margin-top:30px;
-
+    display:grid;
+    gap:15px;
+    margin-top:30px;
 }
 
 .adminBox button{
+    padding:16px;
+    font-size:17px;
+    border:none;
+    border-radius:10px;
+    background:#007cff;
+    color:white;
+    cursor:pointer;
+    transition: 0.3s;
+}
 
-padding:16px;
+.adminBox button:hover{
+    background:#0056b3;
+}
 
-font-size:17px;
-
-border:none;
-
-border-radius:10px;
-
-background:#007cff;
-
-color:white;
-
-cursor:pointer;
-
-<div id="userStatusPanel">
-
-<h2>İSTİFADƏÇİ STATUSLARI</h2>
-
-<div class="statusGrid">
-
-<div class="statusCard">
-<h3>ÇAKIR</h3>
-<span class="onlineUser">🟢 ONLAYN</span>
-</div>
-
-<div class="statusCard">
-<h3>POLAT</h3>
-<span class="onlineUser">🟢 ONLAYN</span>
-</div>
-
-<div class="statusCard">
-<h3>ABDÜLEY</h3>
-<span class="offlineUser">🔴 OFLAYN</span>
-</div>
-
-</div>
-
-</div>
-
-<style>
-
+/* STATUS PANEL */
 #userStatusPanel{
-width:95%;
-margin:30px auto;
+    width:95%;
+    margin:30px auto;
 }
 
 #userStatusPanel h2{
-text-align:center;
-margin-bottom:20px;
+    text-align:center;
+    margin-bottom:20px;
 }
 
 .statusGrid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
 
 .statusCard{
-background:#111;
-padding:20px;
-border-radius:12px;
-border:1px solid #222;
-text-align:center;
+    background:#111;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #222;
+    text-align:center;
 }
 
 .onlineUser{
-color:#00ff66;
-font-weight:bold;
+    color:#00ff66;
+    font-weight:bold;
 }
 
 .offlineUser{
-color:red;
-font-weight:bold;
+    color:red;
+    font-weight:bold;
 }
 
+/* RESPONSIVE */
+@media(max-width:768px){
+    .logo{
+        font-size:35px;
+        letter-spacing:4px;
+    }
+    header{
+        font-size:22px;
+    }
+    .map{
+        height:300px;
+    }
+}
 </style>
-  setInterval(function(){
+</head>
+<body>
 
-const users=document.querySelectorAll(".onlineUser");
+<!-- LOGIN -->
+<div id="loginPage">
+    <div class="logo">REGIONAL KGT</div>
+    <div class="login">
+        <input type="password" id="password" placeholder="Giriş Parolu">
+        <button onclick="login()">GİRİŞ</button>
+        <div class="error" id="error"></div>
+    </div>
+</div>
 
-users.forEach(function(user){
+<!-- MAIN -->
+<div id="main">
+    <div class="menu" onclick="menuOpen()">☰</div>
 
-if(Math.random()>0.5){
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showSection('dashboard')">Ana Səhifə</a>
+        <a href="#" onclick="admin()">Admin Paneli</a>
+        <a href="#" onclick="showSection('userStatusPanel')">İstifadəçilər</a>
+        <a href="#">Sənədlər</a>
+        <a href="#">Elanlar</a>
+        <a href="#">Parametrlər</a>
+    </div>
 
-user.innerHTML="🟢 ONLAYN";
-user.style.color="#00ff66";
+    <header>REGIONAL KGT</header>
 
-}else{
+    <div class="map">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=44.7%2C38.2%2C50.4%2C41.9&layer=mapnik"></iframe>
+    </div>
 
-user.innerHTML="🟡 AKTİV";
-user.style.color="#ffd500";
+    <!-- 2A HİSSƏ - IDAREETME PANELİ -->
+    <section id="dashboard">
+        <div class="panel">
+            <h2>REGIONAL KGT İDARƏETMƏ PANELİ</h2>
+            <div class="cards">
+                <div class="box" onclick="admin()">
+                    🛡 <h3>ADMIN PANELİ</h3> <p>Yalnız admin üçün</p>
+                </div>
+                <div class="box" onclick="showSection('userStatusPanel')">
+                    👤 <h3>İSTİFADƏÇİLƏR</h3> <p>Aktiv istifadəçilər</p>
+                </div>
+                <div class="box">
+                    📁 <h3>SƏNƏDLƏR</h3> <p>Bütün sənədlər</p>
+                </div>
+                <div class="box">
+                    📢 <h3>ELANLAR</h3> <p>Yeni elanlar</p>
+                </div>
+                <div class="box">
+                    📨 <h3>MESAJLAR</h3> <p>Bildiriş sistemi</p>
+                </div>
+                <div class="box">
+                    ⚙ <h3>PARAMETRLƏR</h3> <p>Sistem ayarları</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- STATUS PANEL -->
+    <div id="userStatusPanel">
+        <h2>İSTİFADƏÇI STATUSLARI</h2>
+        <div class="statusGrid">
+            <div class="statusCard">
+                <h3>ÇAKIR</h3>
+                <span class="onlineUser">🟢 ONLAYN</span>
+            </div>
+            <div class="statusCard">
+                <h3>POLAT</h3>
+                <span class="onlineUser">🟢 ONLAYN</span>
+            </div>
+            <div class="statusCard">
+                <h3>ABDÜLEY</h3>
+                <span class="offlineUser">🔴 OFLAYN</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OLD ADMIN PANEL -->
+    <div id="adminPanel">
+        <div class="adminBox">
+            <h2>Admin Paneli</h2>
+            <button>İstifadəçi əlavə et</button>
+            <button>Elan paylaş</button>
+            <button>Sənəd əlavə et</button>
+            <button>Mesaj göndər</button>
+        </div>
+    </div>
+
+    <!-- NEW ADMIN SCREEN -->
+    <section id="adminScreen">
+        <h2>ADMIN PANELİ</h2>
+        <div class="adminBox">
+            <button>➕ Yeni istifadəçi yarat</button>
+            <button>📢 Elan paylaş</button>
+            <button>📄 Sənəd əlavə et</button>
+            <button>✉ İstifadəçiyə mesaj göndər</button>
+            <button>🟢 Onlayn istifadəçilər</button>
+            <button>🔴 Oflayn istifadəçilər</button>
+            <button>⚙ Sistem parametrləri</button>
+        </div>
+    </section>
+</div>
+
+<script>
+let adminPassword = "POLAT";
+
+function login(){
+    let pass = document.getElementById("password").value.toUpperCase();
+    if(pass == "ÇAKIR" || pass == "POLAT" || pass == "ABDÜLEY"){
+        document.getElementById("loginPage").style.style.display = "none";
+        document.getElementById("main").style.display = "block";
+        window.user = pass;
+    } else {
+        document.getElementById("error").innerHTML = "Parol yanlışdır";
+    }
 }
 
-});
+function menuOpen(){
+    document.getElementById("sidebar").classList.toggle("active");
+}
 
-},5000);
-</style>
+function admin(){
+    if(window.user == adminPassword){
+        document.getElementById("adminPanel").style.display = "block";
+        document.getElementById("adminScreen").style.display = "block";
+        window.scrollTo({top: document.getElementById('adminScreen').offsetTop, behavior: 'smooth'});
+    } else {
+        alert("Admin panelinə giriş icazəniz yoxdur.");
+    }
+}
+
+function showSection(id) {
+    document.getElementById('sidebar').classList.remove('active');
+    let el = document.getElementById(id);
+    if(el) {
+        el.scrollIntoView({behavior: 'smooth'});
+    }
+}
+
+setInterval(function(){
+    const users = document.querySelectorAll(".onlineUser");
+    users.forEach(function(user){
+        if(Math.random() > 0.5){
+            user.innerHTML = "🟢 ONLAYN";
+            user.style.color = "#00ff66";
+        } else {
+            user.innerHTML = "🟡 AKTİV";
+            user.style.color = "#ffd500";
+        }
+    });
+}, 5000);
 </script>
 
 </body>
 </html>
+
+
