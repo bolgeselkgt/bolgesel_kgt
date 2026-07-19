@@ -1,215 +1,570 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { display: flex; background: #f4f6f9; }
-        .sidebar { width: 250px; height: 100vh; background: #2c3e50; color: white; padding: 20px; position: fixed; }
-        .sidebar h2 { text-align: center; margin-bottom: 30px; font-size: 24px; }
-        .sidebar a { display: block; color: #adb5bd; padding: 12px; text-decoration: none; margin-bottom: 5px; border-radius: 4px; }
-        .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; }
-        .main-content { margin-left: 250px; padding: 40px; width: calc(100% - 250px); }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; }
-        .card h3 { color: #7f8c8d; font-size: 14px; margin-bottom: 10px; }
-        .card p { font-size: 24px; font-weight: bold; color: #2c3e50; }
-        .form-section { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        .btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
-        .btn:hover { background: #2980b9; }
-        .status-message { margin-top: 15px; padding: 10px; border-radius: 4px; display: none; }
-        .status-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REGIONAL KGT</title>
 
-        /* Yeni Əlavə Olunan Funksiyaların Elementləri */
-        .img-preview { max-width: 100%; max-height: 150px; margin-top: 10px; border-radius: 4px; display: none; object-fit: cover; }
-        .chat-box { height: 200px; border: 1px solid #ccc; border-radius: 4px; padding: 10px; overflow-y: auto; background: #fafafa; margin-bottom: 10px; }
-        .chat-msg { margin-bottom: 8px; padding: 6px 10px; border-radius: 4px; font-size: 14px; max-width: 85%; }
-        .msg-admin { background: #e0f2fe; margin-left: auto; text-align: right; color: #0369a1; }
-        .msg-user { background: #eee; color: #333; }
-        .chat-input-group { display: flex; gap: 8px; }
-        .chat-input-group input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        .chat-input-group button { width: auto; padding: 0 15px; background: #2ecc71; }
-        .chat-input-group button:hover { background: #27ae60; }
-        .user-list { list-style: none; margin-top: 10px; }
-        .user-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-        .online { background: #2ecc71; }
-        .offline { background: #95a5a6; }
-        .dashboard-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Poppins,sans-serif;
+    background:#070707;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* LOGIN */
+#loginPage{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background: linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)), url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+}
+
+.logo{
+    font-family:Orbitron;
+    font-size:55px;
+    font-weight:800;
+    letter-spacing:8px;
+    margin-bottom:60px;
+    text-shadow: 0 0 20px #00bfff, 0 0 50px #009dff;
+}
+
+.login{
+    width:350px;
+    max-width:90%;
+}
+
+.login input{
+    width:100%;
+    padding:16px;
+    background:#101010;
+    border:1px solid #555;
+    border-radius:10px;
+    color:white;
+    font-size:18px;
+    outline:none;
+}
+
+.login button{
+    margin-top:20px;
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    background:#0094ff;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login button:hover{
+    background:#006fd1;
+}
+
+.error{
+    margin-top:15px;
+    text-align:center;
+    color:red;
+}
+
+/* MAIN */
+#main{
+    display:none;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:280px;
+    height:100%;
+    background:#111;
+    transition:.35s;
+    padding-top:70px;
+    z-index:9999;
+}
+
+.sidebar a{
+    display:block;
+    padding:17px;
+    text-decoration:none;
+    color:white;
+    font-size:17px;
+    border-bottom:1px solid #222;
+}
+
+.sidebar a:hover{
+    background:#0094ff;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.menu{
+    position:fixed;
+    top:15px;
+    left:15px;
+    font-size:30px;
+    cursor:pointer;
+    z-index:10000;
+}
+
+/* HEADER */
+header{
+    text-align:center;
+    padding:30px;
+    font-size:30px;
+    font-family:Orbitron;
+}
+
+/* MAP */
+.map{
+    width:95%;
+    height:450px;
+    margin:auto;
+    border-radius:15px;
+    overflow:hidden;
+    border:2px solid #444;
+}
+
+.map iframe{
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+/* USERS & PANEL */
+.panel{
+    width:95%;
+    margin:40px auto;
+}
+
+.panel h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.box{
+    background:#111;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+    border:1px solid #222;
+}
+
+.box:hover{
+    transform:scale(1.04);
+    background:#0094ff;
+}
+
+.box h3{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+/* ADMIN SCREENS */
+#adminPanel, #adminScreen{
+    display:none;
+    width:95%;
+    margin:30px auto;
+    padding:30px;
+    background:#111;
+    border-radius:12px;
+    border:1px solid #222;
+}
+
+.adminBox{
+    display:grid;
+    gap:15px;
+    margin-top:30px;
+}
+
+.adminBox button, .adminBox input[type="file"] {
+    padding:16px;
+    font-size:17px;
+    border:none;
+    border-radius:10px;
+    background:#007cff;
+    color:white;
+    cursor:pointer;
+    transition: 0.3s;
+}
+
+.adminBox button:hover{
+    background:#0056b3;
+}
+
+/* ŞƏKİL ÖNBAXIŞ (PREVIEW) */
+.img-preview {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 15px;
+    border-radius: 8px;
+    display: none;
+    border: 1px solid #444;
+}
+
+/* SİSTEM ÇAT BÖLMƏSİ */
+.chatSection {
+    margin-top: 30px;
+    border-top: 1px solid #222;
+    padding-top: 20px;
+}
+
+.chatBox {
+    height: 200px;
+    background: #090909;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.chatMsg {
+    margin-bottom: 10px;
+    font-size: 15px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.msgMe {
+    background: #007cff;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.msgOther {
+    background: #222;
+    color: white;
+}
+
+.chatInputs {
+    display: flex;
+    gap: 10px;
+}
+
+.chatInputs input {
+    flex: 1;
+    padding: 12px;
+    background: #101010;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: white;
+}
+
+.chatInputs button {
+    width: auto;
+    padding: 0 25px;
+    background: #00ff66;
+    color: black;
+    font-weight: bold;
+}
+
+.chatInputs button:hover {
+    background: #00cc52;
+}
+
+/* STATUS PANEL */
+#userStatusPanel{
+    width:95%;
+    margin:30px auto;
+}
+
+#userStatusPanel h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.statusGrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.statusCard{
+    background:#111;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #222;
+    text-align:center;
+}
+
+.onlineUser{
+    color:#00ff66;
+    font-weight:bold;
+}
+
+.offlineUser{
+    color:red;
+    font-weight:bold;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .logo{
+        font-size:35px;
+        letter-spacing:4px;
+    }
+    header{
+        font-size:22px;
+    }
+    .map{
+        height:300px;
+    }
+}
+</style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>Admin Panel</h2>
-        <a href="#" class="active">İdarə Paneli</a>
-        <a href="#">Elan Paylaş</a>
-        <a href="#">İstifadəçilər</a>
-        <a href="#">Ayarlar</a>
+<!-- LOGIN -->
+<div id="loginPage">
+    <div class="logo">REGIONAL KGT</div>
+    <div class="login">
+        <input type="password" id="password" placeholder="Giriş Parolu">
+        <button onclick="login()">GİRİŞ</button>
+        <div class="error" id="error"></div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+    <div class="menu" onclick="menuOpen()">☰</div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="showSection('dashboard')">Ana Səhifə</a>
+        <a href="#" onclick="admin()">Admin Paneli</a>
+        <a href="#" onclick="showSection('userStatusPanel')">İstifadəçilər</a>
+        <a href="#">Sənədlər</a>
+        <a href="#">Elanlar</a>
+        <a href="#">Parametrlər</a>
     </div>
 
-    <div class="main-content">
-        <div class="header">
-            <h1>Xoş Gəldiniz</h1>
-            <div id="live-status" style="color: #2ecc71; font-weight: bold;">● Sistem Aktivdir</div>
+    <header>REGIONAL KGT</header>
+
+    <div class="map">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=44.7%2C38.2%2C50.4%2C41.9&layer=mapnik"></iframe>
+    </div>
+
+    <!-- 2A HİSSƏ - IDAREETME PANELİ -->
+    <section id="dashboard">
+        <div class="panel">
+            <h2>REGIONAL KGT İDARƏETMƏ PANELİ</h2>
+            <div class="cards">
+                <div class="box" onclick="admin()">
+                    🛡 <h3>ADMIN PANELİ</h3> <p>Yalnız admin üçün</p>
+                </div>
+                <div class="box" onclick="showSection('userStatusPanel')">
+                    👤 <h3>İSTİFADƏÇİLƏR</h3> <p>Aktiv istifadəçilər</p>
+                </div>
+                <div class="box">
+                    📁 <h3>SƏNƏDLƏR</h3> <p>Bütün sənədlər</p>
+                </div>
+                <div class="box">
+                    📢 <h3>ELANLAR</h3> <p>Yeni elanlar</p>
+                </div>
+                <div class="box">
+                    📨 <h3>MESAJLAR</h3> <p>Bildiriş sistemi</p>
+                </div>
+                <div class="box">
+                    ⚙ <h3>PARAMETRLƏR</h3> <p>Sistem ayarları</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="card-container">
-            <div class="card">
-                <h3>Ümumi Elanlar</h3>
-                <p id="total-ads">12</p>
+    <!-- STATUS PANEL -->
+    <div id="userStatusPanel">
+        <h2>İSTİFADƏÇI STATUSLARI</h2>
+        <div class="statusGrid">
+            <div class="statusCard" id="user-ÇAKIR">
+                <h3>ÇAKIR</h3>
+                <span class="userStatusState onlineUser">🟢 ONLAYN</span>
             </div>
-            <div class="card">
-                <h3>Aktiv İstifadəçilər</h3>
-                <p id="total-users">48</p>
+            <div class="statusCard" id="user-POLAT">
+                <h3>POLAT</h3>
+                <span class="userStatusState onlineUser">🟢 ONLAYN</span>
             </div>
-            <div class="card">
-                <h3>Gözləyən Sorğular</h3>
-                <p>3</p>
-            </div>
-        </div>
-
-        <div class="dashboard-layout">
-            <!-- Sol Hissə: Mövcud Elan Formu və Yeni Çat -->
-            <div>
-                <div class="form-section">
-                    <h2>Yeni Elan Yerləşdir</h2>
-                    <br>
-                    <form id="ad-form">
-                        <div class="form-group">
-                            <label for="ad-title">Elanın Başlığı</label>
-                            <input type="text" id="ad-title" required placeholder="Başlığı daxil edin...">
-                        </div>
-                        <div class="form-group">
-                            <label for="ad-desc">Elanın Mətni</label>
-                            <textarea id="ad-desc" rows="4" required placeholder="Ətraflı məlumat yazın..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="ad-category">Kateqoriya</label>
-                            <select id="ad-category">
-                                <option value="Xidmət">Xidmət</option>
-                                <option value="Daşınmaz Əmlak">Daşınmaz Əmlak</option>
-                                <option value="Elektronika">Elektronika</option>
-                            </select>
-                        </div>
-                        <!-- SİSTEM İÇİNDƏKİ: Şəkil Yükləmə Funksiyası -->
-                        <div class="form-group">
-                            <label>Şəkil Əlavə Et (Könüllü)</label>
-                            <input type="file" id="ad-image" accept="image/*">
-                            <img id="preview" class="img-preview" alt="Ön baxış">
-                        </div>
-                        <button type="submit" class="btn">Paylaş</button>
-                    </form>
-                    <div id="status" class="status-message status-success">Elan uğurla əlavə olundu və qrupda paylaşıldı!</div>
-                </div>
-
-                <!-- SİSTEM İÇİNDƏKİ: Canlı Qrup Çat Sistemi -->
-                <div class="form-section">
-                    <h2>Qrup Çat Sistemi</h2>
-                    <br>
-                    <div class="chat-box" id="chat-container">
-                        <div class="chat-msg msg-user"><b>Ramil:</b> Salam, yeni elan sistemini test edirəm.</div>
-                        <div class="chat-msg msg-admin"><b>Siz (Admin):</b> Salam Ramil, sistem tam aktivdir.</div>
-                    </div>
-                    <div class="chat-input-group">
-                        <input type="text" id="chat-input" placeholder="Mesaj yazın...">
-                        <button class="btn" id="send-chat-btn">Göndər</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sağ Hissə: SİSTEM İÇİNDƏKİ Onlayn/Oflayn İstifadəçi Siyahısı -->
-            <div>
-                <div class="form-section">
-                    <h2>İstifadəçi Statusları</h2>
-                    <br>
-                    <ul class="user-list">
-                        <li class="user-item">
-                            <span><span class="status-dot online"></span>Polad (Admin)</span>
-                            <small style="color: #2ecc71; font-weight: bold;">Onlayn</small>
-                        </li>
-                        <li class="user-item">
-                            <span><span class="status-dot online"></span>Elşən Qasımov</span>
-                            <small style="color: #2ecc71;">Onlayn</small>
-                        </li>
-                        <li class="user-item">
-                            <span><span class="status-dot offline"></span>Məmməd Alıyev</span>
-                            <small style="color: #95a5a6;">Oflayn</small>
-                        </li>
-                        <li class="user-item">
-                            <span><span class="status-dot online"></span>Leyla Əliyeva</span>
-                            <small style="color: #2ecc71;">Onlayn</small>
-                        </li>
-                    </ul>
-                </div>
+            <div class="statusCard" id="user-ABDÜLEY">
+                <h3>ABDÜLEY</h3>
+                <span class="userStatusState offlineUser">🔴 OFLAYN</span>
             </div>
         </div>
     </div>
 
-    <script>
-        // Şəkil önbaxış (Preview) skripti
-        document.getElementById('ad-image').addEventListener('change', function(e) {
-            const preview = document.getElementById('preview');
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    preview.src = event.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                preview.style.display = 'none';
-            }
-        });
+    <!-- OLD ADMIN PANEL -->
+    <div id="adminPanel">
+        <div class="adminBox">
+            <h2>Admin Paneli</h2>
+            <button>İstifadəçi əlavə et</button>
+            <button>Elan paylaş</button>
+            <button>Sənəd əlavə et</button>
+            <button>Mesaj göndər</button>
+        </div>
+    </div>
 
-        // Mövcud Elan Formu Skriptinə İnteqrasiya
-        document.getElementById('ad-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+    <!-- NEW ADMIN SCREEN -->
+    <section id="adminScreen">
+        <h2>ADMIN PANELİ</h2>
+        <div class="adminBox">
+            <button>➕ Yeni istifadəçi yarat</button>
             
-            const title = document.getElementById('ad-title').value;
-            const desc = document.getElementById('ad-desc').value;
-            const category = document.getElementById('ad-category').value;
-            
-            const totalAdsElement = document.getElementById('total-ads');
-            let currentAds = parseInt(totalAdsElement.innerText);
-            totalAdsElement.innerText = currentAds + 1;
-            
-            const statusDiv = document.getElementById('status');
-            statusDiv.style.display = 'block';
-            
-            document.getElementById('ad-form').reset();
-            document.getElementById('preview').style.display = 'none';
-            
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 3000);
-        });
+            <!-- ŞƏKİLLİ ELAN PAYLAŞMA VƏ PREVIEW İNTEQRASİYASI -->
+            <div style="border: 1px dashed #444; padding: 15px; border-radius: 10px;">
+                <label style="display:block; margin-bottom:10px; font-weight:bold;">📢 Şəkilli Elan Paylaş:</label>
+                <input type="file" id="adImgFile" accept="image/*" style="width:100%;">
+                <img id="adImgPreview" class="img-preview" alt="Elan Şəkli">
+                <button style="width:100%; margin-top:10px;" onclick="uploadAd()">Elanı Tamamla</button>
+            </div>
 
-        // Çat Mesaj Göndərmə Skripti
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const container = document.getElementById('chat-container');
-            if(input.value.trim() !== "") {
-                const newMsg = document.createElement('div');
-                newMsg.className = 'chat-msg msg-admin';
-                newMsg.innerHTML = `<b>Siz (Admin):</b> ${input.value}`;
-                container.appendChild(newMsg);
-                container.scrollTop = container.scrollHeight;
-                input.value = "";
-            }
+            <button>📄 Sənəd əlavə et</button>
+            <button>✉ İstifadəçiyə mesaj göndər</button>
+            <button>🟢 Onlayn istifadəçilər</button>
+            <button>🔴 Oflayn istifadəçilər</button>
+            <button>⚙ Sistem parametrləri</button>
+        </div>
+
+        <!-- CANLI ÇAT SİSTEMİ İNTEQRASİYASI -->
+        <div class="chatSection">
+            <h2>CANLI DƏSTƏK VƏ QRUP ÇATI</h2>
+            <div class="chatBox" id="chatContainer">
+                <div class="chatMsg msgOther"><b>Çakır:</b> Xəritə dataları yeniləndi?</div>
+                <div class="chatMsg msgOther"><b>Abdüley:</b> Panel aktivdir, gözləmədəyəm.</div>
+            </div>
+            <div class="chatInputs">
+                <input type="text" id="chatMsgInput" placeholder="Mesajınızı yazın...">
+                <button onclick="sendLiveMessage()">GÖNDƏR</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+let adminPassword = "POLAT";
+
+function login(){
+    let pass = document.getElementById("password").value.toUpperCase();
+    if(pass == "ÇAKIR" || pass == "POLAT" || pass == "ABDÜLEY"){
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        window.user = pass;
+    } else {
+        document.getElementById("error").innerHTML = "Parol yanlışdır";
+    }
+}
+
+function menuOpen(){
+    document.getElementById("sidebar").classList.toggle("active");
+}
+
+function admin(){
+    if(window.user == adminPassword){
+        document.getElementById("adminPanel").style.display = "block";
+        document.getElementById("adminScreen").style.display = "block";
+        window.scrollTo({top: document.getElementById('adminScreen').offsetTop, behavior: 'smooth'});
+    } else {
+        alert("Admin panelinə giriş icazəniz yoxdur.");
+    }
+}
+
+function showSection(id) {
+    document.getElementById('sidebar').classList.remove('active');
+    let el = document.getElementById(id);
+    if(el) {
+        el.scrollIntoView({behavior: 'smooth'});
+    }
+}
+
+/* ŞƏKİL ÖNBAXIŞ (PREVIEW) SKRİPTİ */
+document.getElementById('adImgFile').addEventListener('change', function(e) {
+    const preview = document.getElementById('adImgPreview');
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            preview.src = event.target.result;
+            preview.style.display = 'block';
         }
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+});
 
-        document.getElementById('send-chat-btn').addEventListener('click', sendChatMessage);
-        document.getElementById('chat-input').addEventListener('keypress', function(e) {
-            if(e.key === 'Enter') { sendChatMessage(); }
-        });
-    </script>
+function uploadAd() {
+    alert("Şəkilli elan sistemdə emal olundu və qrupa göndərildi.");
+    document.getElementById('adImgFile').value = "";
+    document.getElementById('adImgPreview').style.display = 'none';
+}
+
+/* CANLI ÇAT FUNKSİYASI */
+function sendLiveMessage() {
+    const input = document.getElementById('chatMsgInput');
+    const container = document.getElementById('chatContainer');
+    if(input.value.trim() !== "") {
+        const msg = document.createElement('div');
+        msg.className = 'chatMsg msgMe';
+        msg.innerHTML = `<b>Siz (${window.user || 'İstifadəçi'}):</b> ${input.value}`;
+        container.appendChild(msg);
+        container.scrollTop = container.scrollHeight;
+        input.value = "";
+    }
+}
+
+document.getElementById('chatMsgInput').addEventListener('keypress', function(e) {
+    if(e.key === 'Enter') { sendLiveMessage(); }
+});
+
+/* DİNAMİK ONLAYN/OFLAYN STATUS DƏYİŞMƏSİ */
+setInterval(function(){
+    const userCards = document.querySelectorAll(".statusCard");
+    userCards.forEach(function(card){
+        const stateSpan = card.querySelector(".userStatusState");
+        const rand = Math.random();
+        
+        if(rand > 0.6) {
+            stateSpan.innerHTML = "🟢 ONLAYN";
+            stateSpan.className = "userStatusState onlineUser";
+        } else if(rand > 0.3) {
+            stateSpan.innerHTML = "🟡 AKTİV";
+            stateSpan.className = "userStatusState";
+            stateSpan.style.color = "#ffd500";
+        } else {
+            stateSpan.innerHTML = "🔴 OFLAYN";
+            stateSpan.className = "userStatusState offlineUser";
+        }
+    });
+}, 5000);
+</script>
+
 </body>
 </html>
