@@ -1,428 +1,118 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REGIONAL KGT</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Poppins,sans-serif;
-    background:#070707;
-    color:white;
-    overflow-x:hidden;
-}
-
-/* LOGIN */
-#loginPage{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background: linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)), url("https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80");
-    background-size:cover;
-    background-position:center;
-}
-
-.logo{
-    font-family:Orbitron;
-    font-size:55px;
-    font-weight:800;
-    letter-spacing:8px;
-    margin-bottom:60px;
-    text-shadow: 0 0 20px #00bfff, 0 0 50px #009dff;
-}
-
-.login{
-    width:350px;
-    max-width:90%;
-}
-
-.login input{
-    width:100%;
-    padding:16px;
-    background:#101010;
-    border:1px solid #555;
-    border-radius:10px;
-    color:white;
-    font-size:18px;
-    outline:none;
-}
-
-.login button{
-    margin-top:20px;
-    width:100%;
-    padding:16px;
-    border:none;
-    border-radius:10px;
-    font-size:18px;
-    font-weight:bold;
-    background:#0094ff;
-    color:white;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.login button:hover{
-    background:#006fd1;
-}
-
-.error{
-    margin-top:15px;
-    text-align:center;
-    color:red;
-}
-
-/* MAIN */
-#main{
-    display:none;
-}
-
-/* SIDEBAR */
-.sidebar{
-    position:fixed;
-    top:0;
-    left:-280px;
-    width:280px;
-    height:100%;
-    background:#111;
-    transition:.35s;
-    padding-top:70px;
-    z-index:9999;
-}
-
-.sidebar a{
-    display:block;
-    padding:17px;
-    text-decoration:none;
-    color:white;
-    font-size:17px;
-    border-bottom:1px solid #222;
-}
-
-.sidebar a:hover{
-    background:#0094ff;
-}
-
-.sidebar.active{
-    left:0;
-}
-
-.menu{
-    position:fixed;
-    top:15px;
-    left:15px;
-    font-size:30px;
-    cursor:pointer;
-    z-index:10000;
-}
-
-/* HEADER */
-header{
-    text-align:center;
-    padding:30px;
-    font-size:30px;
-    font-family:Orbitron;
-}
-
-/* MAP */
-.map{
-    width:95%;
-    height:450px;
-    margin:auto;
-    border-radius:15px;
-    overflow:hidden;
-    border:2px solid #444;
-}
-
-.map iframe{
-    width:100%;
-    height:100%;
-    border:0;
-}
-
-/* USERS & PANEL */
-.panel{
-    width:95%;
-    margin:40px auto;
-}
-
-.panel h2{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.box{
-    background:#111;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    cursor:pointer;
-    transition:.3s;
-    border:1px solid #222;
-}
-
-.box:hover{
-    transform:scale(1.04);
-    background:#0094ff;
-}
-
-.box h3{
-    margin-top:10px;
-    margin-bottom:10px;
-}
-
-/* ADMIN SCREENS */
-#adminPanel, #adminScreen{
-    display:none;
-    width:95%;
-    margin:30px auto;
-    padding:30px;
-    background:#111;
-    border-radius:12px;
-    border:1px solid #222;
-}
-
-.adminBox{
-    display:grid;
-    gap:15px;
-    margin-top:30px;
-}
-
-.adminBox button{
-    padding:16px;
-    font-size:17px;
-    border:none;
-    border-radius:10px;
-    background:#007cff;
-    color:white;
-    cursor:pointer;
-    transition: 0.3s;
-}
-
-.adminBox button:hover{
-    background:#0056b3;
-}
-
-/* STATUS PANEL */
-#userStatusPanel{
-    width:95%;
-    margin:30px auto;
-}
-
-#userStatusPanel h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.statusGrid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.statusCard{
-    background:#111;
-    padding:20px;
-    border-radius:12px;
-    border:1px solid #222;
-    text-align:center;
-}
-
-.onlineUser{
-    color:#00ff66;
-    font-weight:bold;
-}
-
-.offlineUser{
-    color:red;
-    font-weight:bold;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-    .logo{
-        font-size:35px;
-        letter-spacing:4px;
-    }
-    header{
-        font-size:22px;
-    }
-    .map{
-        height:300px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { display: flex; background: #f4f6f9; }
+        .sidebar { width: 250px; height: 100vh; background: #2c3e50; color: white; padding: 20px; position: fixed; }
+        .sidebar h2 { text-align: center; margin-bottom: 30px; font-size: 24px; }
+        .sidebar a { display: block; color: #adb5bd; padding: 12px; text-decoration: none; margin-bottom: 5px; border-radius: 4px; }
+        .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; }
+        .main-content { margin-left: 250px; padding: 40px; width: calc(100% - 250px); }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; }
+        .card h3 { color: #7f8c8d; font-size: 14px; margin-bottom: 10px; }
+        .card p { font-size: 24px; font-weight: bold; color: #2c3e50; }
+        .form-section { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .btn:hover { background: #2980b9; }
+        .status-message { margin-top: 15px; padding: 10px; border-radius: 4px; display: none; }
+        .status-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginPage">
-    <div class="logo">REGIONAL KGT</div>
-    <div class="login">
-        <input type="password" id="password" placeholder="Giriş Parolu">
-        <button onclick="login()">GİRİŞ</button>
-        <div class="error" id="error"></div>
-    </div>
-</div>
-
-<!-- MAIN -->
-<div id="main">
-    <div class="menu" onclick="menuOpen()">☰</div>
-
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="showSection('dashboard')">Ana Səhifə</a>
-        <a href="#" onclick="admin()">Admin Paneli</a>
-        <a href="#" onclick="showSection('userStatusPanel')">İstifadəçilər</a>
-        <a href="#">Sənədlər</a>
-        <a href="#">Elanlar</a>
-        <a href="#">Parametrlər</a>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <a href="#" class="active">İdarə Paneli</a>
+        <a href="#">Elan Paylaş</a>
+        <a href="#">İstifadəçilər</a>
+        <a href="#">Ayarlar</a>
     </div>
 
-    <header>REGIONAL KGT</header>
+    <div class="main-content">
+        <div class="header">
+            <h1>Xoş Gəldiniz</h1>
+            <div id="live-status" style="color: #27ae60; font-weight: bold;">● Sistem Aktivdir</div>
+        </div>
 
-    <div class="map">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=44.7%2C38.2%2C50.4%2C41.9&layer=mapnik"></iframe>
-    </div>
-
-    <!-- 2A HİSSƏ - IDAREETME PANELİ -->
-    <section id="dashboard">
-        <div class="panel">
-            <h2>REGIONAL KGT İDARƏETMƏ PANELİ</h2>
-            <div class="cards">
-                <div class="box" onclick="admin()">
-                    🛡 <h3>ADMIN PANELİ</h3> <p>Yalnız admin üçün</p>
-                </div>
-                <div class="box" onclick="showSection('userStatusPanel')">
-                    👤 <h3>İSTİFADƏÇİLƏR</h3> <p>Aktiv istifadəçilər</p>
-                </div>
-                <div class="box">
-                    📁 <h3>SƏNƏDLƏR</h3> <p>Bütün sənədlər</p>
-                </div>
-                <div class="box">
-                    📢 <h3>ELANLAR</h3> <p>Yeni elanlar</p>
-                </div>
-                <div class="box">
-                    📨 <h3>MESAJLAR</h3> <p>Bildiriş sistemi</p>
-                </div>
-                <div class="box">
-                    ⚙ <h3>PARAMETRLƏR</h3> <p>Sistem ayarları</p>
-                </div>
+        <div class="card-container">
+            <div class="card">
+                <h3>Ümumi Elanlar</h3>
+                <p id="total-ads">12</p>
+            </div>
+            <div class="card">
+                <h3>Aktiv İstifadəçilər</h3>
+                <p id="total-users">48</p>
+            </div>
+            <div class="card">
+                <h3>Gözləyən Sorğular</h3>
+                <p>3</p>
             </div>
         </div>
-    </section>
 
-    <!-- STATUS PANEL -->
-    <div id="userStatusPanel">
-        <h2>İSTİFADƏÇI STATUSLARI</h2>
-        <div class="statusGrid">
-            <div class="statusCard">
-                <h3>ÇAKIR</h3>
-                <span class="onlineUser">🟢 ONLAYN</span>
-            </div>
-            <div class="statusCard">
-                <h3>POLAT</h3>
-                <span class="onlineUser">🟢 ONLAYN</span>
-            </div>
-            <div class="statusCard">
-                <h3>ABDÜLEY</h3>
-                <span class="offlineUser">🔴 OFLAYN</span>
-            </div>
+        <div class="form-section">
+            <h2>Yeni Elan Yerləşdir</h2>
+            <br>
+            <form id="ad-form">
+                <div class="form-group">
+                    <label for="ad-title">Elanın Başlığı</label>
+                    <input type="text" id="ad-title" required placeholder="Başlığı daxil edin...">
+                </div>
+                <div class="form-group">
+                    <label for="ad-desc">Elanın Mətni</label>
+                    <textarea id="ad-desc" rows="4" required placeholder="Ətraflı məlumat yazın..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ad-category">Kateqoriya</label>
+                    <select id="ad-category">
+                        <option value="Xidmət">Xidmət</option>
+                        <option value="Daşınmaz Əmlak">Daşınmaz Əmlak</option>
+                        <option value="Elektronika">Elektronika</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Paylaş</button>
+            </form>
+            <div id="status" class="status-message status-success">Elan uğurla əlavə olundu və qrupda paylaşıldı!</div>
         </div>
     </div>
 
-    <!-- OLD ADMIN PANEL -->
-    <div id="adminPanel">
-        <div class="adminBox">
-            <h2>Admin Paneli</h2>
-            <button>İstifadəçi əlavə et</button>
-            <button>Elan paylaş</button>
-            <button>Sənəd əlavə et</button>
-            <button>Mesaj göndər</button>
-        </div>
-    </div>
-
-    <!-- NEW ADMIN SCREEN -->
-    <section id="adminScreen">
-        <h2>ADMIN PANELİ</h2>
-        <div class="adminBox">
-            <button>➕ Yeni istifadəçi yarat</button>
-            <button>📢 Elan paylaş</button>
-            <button>📄 Sənəd əlavə et</button>
-            <button>✉ İstifadəçiyə mesaj göndər</button>
-            <button>🟢 Onlayn istifadəçilər</button>
-            <button>🔴 Oflayn istifadəçilər</button>
-            <button>⚙ Sistem parametrləri</button>
-        </div>
-    </section>
-</div>
-
-<script>
-let adminPassword = "POLAT";
-
-function login(){
-    let pass = document.getElementById("password").value.toUpperCase();
-    if(pass == "ÇAKIR" || pass == "POLAT" || pass == "ABDÜLEY"){
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("main").style.display = "block";
-        window.user = pass;
-    } else {
-        document.getElementById("error").innerHTML = "Parol yanlışdır";
-    }
-}
-
-function menuOpen(){
-    document.getElementById("sidebar").classList.toggle("active");
-}
-
-function admin(){
-    if(window.user == adminPassword){
-        document.getElementById("adminPanel").style.display = "block";
-        document.getElementById("adminScreen").style.display = "block";
-        window.scrollTo({top: document.getElementById('adminScreen').offsetTop, behavior: 'smooth'});
-    } else {
-        alert("Admin panelinə giriş icazəniz yoxdur.");
-    }
-}
-
-function showSection(id) {
-    document.getElementById('sidebar').classList.remove('active');
-    let el = document.getElementById(id);
-    if(el) {
-        el.scrollIntoView({behavior: 'smooth'});
-    }
-}
-
-setInterval(function(){
-    const users = document.querySelectorAll(".onlineUser");
-    users.forEach(function(user){
-        if(Math.random() > 0.5){
-            user.innerHTML = "🟢 ONLAYN";
-            user.style.color = "#00ff66";
-        } else {
-            user.innerHTML = "🟡 AKTİV";
-            user.style.color = "#ffd500";
-        }
-    });
-}, 5000);
-</script>
-
+    <script>
+        // Elanların dinamik idarə edilməsi
+        document.getElementById('ad-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('ad-title').value;
+            const desc = document.getElementById('ad-desc').value;
+            const category = document.getElementById('ad-category').value;
+            
+            // Statistikada elan sayını artırırıq
+            const totalAdsElement = document.getElementById('total-ads');
+            let currentAds = parseInt(totalAdsElement.innerText);
+            totalAdsElement.innerText = currentAds + 1;
+            
+            // Uğurlu bildiriş mesajı
+            const statusDiv = document.getElementById('status');
+            statusDiv.style.display = 'block';
+            
+            // Formu sıfırlayırıq
+            document.getElementById('ad-form').reset();
+            
+            // 3 saniyə sonra mesajı gizlədirik
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+            
+            console.log("Yeni Elan:", { title, desc, category, time: new Date().toLocaleTimeString() });
+        });
+    </script>
 </body>
 </html>
+
