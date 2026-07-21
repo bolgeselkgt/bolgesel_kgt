@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REGIONAL KGT</title>
+<title>BÖLGESEL KGT</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -469,11 +469,9 @@ header{
 </div>
 
 <script>
-let adminPassword = "POLAT";
-
 function login(){
     let pass = document.getElementById("password").value.toUpperCase();
-    if(pass == "ÇAKIR" || pass == "POLAT" || pass == "ABDÜLEY" || pass == "AKİF"){
+    if(pass == "ÇAKIR" || pass == "POLAT" || pass == "ABDÜLEY" || pass == "AKİF" || pass == "CAHİT"){
         document.getElementById("loginPage").style.display = "none";
         document.getElementById("main").style.display = "block";
         window.user = pass;
@@ -487,13 +485,9 @@ function menuOpen(){
 }
 
 function admin(){
-    if(window.user == adminPassword){
-        document.getElementById("adminPanel").style.display = "block";
-        document.getElementById("adminScreen").style.display = "block";
-        window.scrollTo({top: document.getElementById('adminScreen').offsetTop, behavior: 'smooth'});
-    } else {
-        alert("Admin panelinə giriş icazəniz yoxdur.");
-    }
+    document.getElementById("adminPanel").style.display = "block";
+    document.getElementById("adminScreen").style.display = "block";
+    window.scrollTo({top: document.getElementById('adminScreen').offsetTop, behavior: 'smooth'});
 }
 
 function showSection(id) {
